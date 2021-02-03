@@ -10,7 +10,7 @@ public class Main {
      * Question:
      * There is 4 operation n-1, n/2, n/3, n/5. We want to reach 0 by using this operations.
      * What is the minimum number of operations to reach 0?
-     * 
+     *
      * Dynamic Programming:
      * We hold min number of operations from 0 to n in array. And every step we will check i-1, i/2, i/3, i/5
      * if it's possible. Then ith element becomes min+1.
