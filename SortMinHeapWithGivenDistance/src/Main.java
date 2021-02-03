@@ -1,3 +1,6 @@
+/**
+ * @author Hakkı Can Akut
+ */
 public class Main {
     public static void main(String[] args) {
         int k=3;
