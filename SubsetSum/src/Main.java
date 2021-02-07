@@ -1,8 +1,12 @@
+/**
+ * @author Hakkı Can Akut
+ */
 public class Main {
     public static void main(String[] args) {
-        int[] set = {1,3,4,6,9};
+        int[] set = {1, 3, 4, 6, 9};
         int sum = 15;
         System.out.println(subsetSum(set, sum)); // must return true
+        System.out.println(recursiveSubsetSum(set, sum, 0)); // must return true
     }
 
     /**
@@ -27,5 +31,26 @@ public class Main {
             }
         }
         return result[set.length][sum];
+    }
+
+    /**
+     * recursive solution
+     *
+     * @param set   is given superSequence
+     * @param sum   is given number
+     * @param index is current index of set
+     * @return true if there is subsequence for given number
+     */
+    public static boolean recursiveSubsetSum(int[] set, int sum, int index) {
+        if (sum == 0) {
+            return true;
+        }
+        if (index >= set.length || sum < 0) {
+            return false;
+        }
+        boolean result1 = recursiveSubsetSum(set, sum - set[index], index + 1);
+        boolean result2 = recursiveSubsetSum(set, sum, index + 1);
+
+        return result1 || result2;
     }
 }
