@@ -6,6 +6,7 @@ public class Main {
         int[] arr = {1, 3, 4};
         int limit = 14;
         System.out.println(findMin(arr, limit));
+        System.out.println(recursiveFindMin(arr, limit));
     }
 
     /**
@@ -13,7 +14,7 @@ public class Main {
      * There is infinite number of items with certain kg. such as {1, 3, 4}
      * We have a limit in our bag and want to get minimum number of items.
      * And get our bag full.
-     *
+     * <p>
      * Dynamic Programming:
      * We hold min number of items from 0 to limit in array. For example if we want to find 6 and our array is {1, 3, 4}
      * We will check 5th, 3rd and 2nd indexes and make 6th index element as min + 1
@@ -54,5 +55,29 @@ public class Main {
             }
         }
         return result[limit];
+    }
+
+    /**
+     * Recursive solution
+     *
+     * @param array of items
+     * @param limit we need to get
+     * @return number of minimum items
+     */
+    public static int recursiveFindMin(int[] array, int limit) {
+        if (limit == 0) {
+            return 0;
+        } else if (limit < 0) {
+            return Integer.MAX_VALUE;
+        }
+        int current = Integer.MAX_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            int result = recursiveFindMin(array, limit - array[i]);
+            if (result != Integer.MAX_VALUE) {
+                current = Math.min(current, result + 1);
+            }
+        }
+
+        return current;
     }
 }
