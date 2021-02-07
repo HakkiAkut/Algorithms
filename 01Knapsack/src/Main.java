@@ -6,6 +6,7 @@ public class Main {
         int[] profit = {1, 3, 5, 6, 7};
         int[] weight = {2, 3, 4, 5, 6};
         System.out.println(knapsack(profit, weight, 8));// will return 9
+        System.out.println(recursiveKnapsack(profit, weight, 8, 0));
     }
 
     /**
@@ -33,5 +34,29 @@ public class Main {
         }
 
         return result[n1][capacity];
+    }
+
+    /**
+     * Recursive Solution
+     *
+     * @param profit   array of items
+     * @param weight   array of items
+     * @param capacity of knapsack
+     * @param index    current index of array
+     * @return max value
+     */
+    public static int recursiveKnapsack(int[] profit, int[] weight, int capacity, int index) {
+        // index cannot be greater than weight length
+        if (index >= weight.length) {
+            return 0;
+        }
+        // weight of item cannot be greater than capacity,
+        // if it is than it will continue to check other items
+        if (capacity < weight[index]) {
+            return recursiveKnapsack(profit, weight, capacity, index + 1);
+        }
+        int take = profit[index] + recursiveKnapsack(profit, weight, capacity - weight[index], index + 1);
+        int notTake = recursiveKnapsack(profit, weight, capacity, index + 1);
+        return Math.max(take, notTake);
     }
 }
